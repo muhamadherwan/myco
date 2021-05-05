@@ -28,7 +28,16 @@ class LoginController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
 
-    protected $redirectTo = 'company';
+    //protected $redirectTo = 'company';
+
+    protected function authenticated($request, $user) {
+        //return $user;
+        if ($user->email === 'd@d.com'){
+            return redirect('/company');
+        } else {
+            return redirect('/home');
+        }
+    }
 
     /**
      * Create a new controller instance.
