@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Support\Facades\Auth;//add
+
 class LoginController extends Controller
 {
     /*
@@ -28,16 +30,21 @@ class LoginController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
 
-    //protected $redirectTo = 'company';
-
-    protected function authenticated($request, $user) {
-        //return $user;
-        if ($user->email === 'd@d.com'){
-            return redirect('/company');
-        } else {
-            return redirect('/home');
+    public function redirectTo() {
+        $role = Auth::user()->role; 
+        switch ($role) {
+          case 'admin':
+            return '/company';
+            break;
+          case 'user':
+            return '/home';
+            break; 
+      
+          default:
+            return '/home'; 
+          break;
         }
-    }
+      }
 
     /**
      * Create a new controller instance.

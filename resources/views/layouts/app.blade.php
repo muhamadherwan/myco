@@ -53,7 +53,7 @@
                                 </li>
                             @endif
                         @else
-                            @if (Auth::user()->email == 'd@d.com')
+                            @if (Auth::user()->role == 'admin')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('company') }}">Company</a>
                             </li>

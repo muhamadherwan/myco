@@ -23,10 +23,10 @@ class checkUser
     $user = Auth::user();
     // if (!Auth::check()) // This isnt necessary, it should be part of your 'auth' middleware
     //   return redirect('/home');
-
+dd($user);
     if($user->email && $user->email != 'd@d.com')
 
-        return redirect('/home');
+    return redirect('/home');
         
         return $next($request);
         

@@ -24,12 +24,15 @@ Route::get('/', function () {
 
 //Route::get('/company', [CompanyController::class, 'index'])->name('company')->middleware('auth');
 
-Route::view('noaccess','noaccess');
 
-Route::group(['middleware'=>['auth','protectedPage']], function(){
-      //Route::view('company','company');
-      Route::get('/company', [CompanyController::class, 'index'])->name('company');
-});
+// Route::group(['middleware'=>['auth','protectedPage']], function(){
+//       //Route::view('company','company');
+//       Route::get('/company', [CompanyController::class, 'index'])->name('company');
+// });
+
+//Route::get('/admin_dashboard', 'Admin\DashboardController@index')->middleware('role:admin');
+Route::get('/company', [CompanyController::class, 'index'])->name('company')->middleware('role:admin');
+//Route::get('/seller_dashboard', 'Seller\DashboardController@index');
 
 // disable register
 Auth::routes(['register' => false]);
