@@ -20,19 +20,10 @@ Route::get('/', function () {
     
 });
 
-//Route::resource('company',CompanyController::class)->middleware('auth');
-
-//Route::get('/company', [CompanyController::class, 'index'])->name('company')->middleware('auth');
-
-
-// Route::group(['middleware'=>['auth','protectedPage']], function(){
-//       //Route::view('company','company');
-//       Route::get('/company', [CompanyController::class, 'index'])->name('company');
-// });
-
+//Route::resource('ajaxproducts',ProductAjaxController::class);
 //Route::get('/admin_dashboard', 'Admin\DashboardController@index')->middleware('role:admin');
-Route::get('/company', [CompanyController::class, 'index'])->name('company')->middleware('role:admin');
-//Route::get('/seller_dashboard', 'Seller\DashboardController@index');
+
+Route::get('/company', [CompanyController::class, 'index'])->name('company.index')->middleware('role:admin');
 
 // disable register
 Auth::routes(['register' => false]);
