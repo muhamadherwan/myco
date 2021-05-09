@@ -22,9 +22,9 @@ class CompanyController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
    
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editCompany">Edit</a>';
    
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteCompany">Delete</a>';
     
                             return $btn;
                     })
@@ -53,7 +53,20 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        Company::updateOrCreate(
+            ['id' => $request->company_id],
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'website' => $request->website    
+            ]
+        );
+
+        //Company::create($request->all());
+            
+        return response()->json(['success'=>'Company saved successfully.']);
+        
     }
 
     /**
@@ -73,9 +86,10 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit($id)
     {
-        //
+        $company = Company::find($id);
+        return response()->json($company);
     }
 
     /**
@@ -96,8 +110,10 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        Company::find($id)->delete();
+     
+        return response()->json(['success'=>'Product deleted successfully.']);
     }
 }

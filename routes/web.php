@@ -23,7 +23,13 @@ Route::get('/', function () {
 //Route::resource('ajaxproducts',ProductAjaxController::class);
 //Route::get('/admin_dashboard', 'Admin\DashboardController@index')->middleware('role:admin');
 
+//Route::resource('company',CompanyController::class);
 Route::get('/company', [CompanyController::class, 'index'])->name('company.index')->middleware('role:admin');
+Route::post('/company', [CompanyController::class, 'store'])->name('company.store');
+Route::get('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+Route::delete('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+
+
 
 // disable register
 Auth::routes(['register' => false]);
